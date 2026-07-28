@@ -14,8 +14,8 @@ pipeline {
         APP_NAME = 'temperature-conversion-service'
         JAR_NAME = 'temperature-conversion-service-0.0.1-SNAPSHOT.jar'
         DEPLOY_DIR = '/opt/services'
-        EC2_HOST   = 'ec2-user@<your-ec2-ip-or-hostname>'
-        EC2_CREDS  = 'temperature-conversion-ec2-ssh-key'   // Jenkins credential ID for the EC2 private key
+        EC2_HOST   = 'ec2-user@54.160.201.215'
+        EC2_CREDS  = 'fever-detection-ec2-ssh-key'  // Jenkins credential ID for the EC2 private key, since we use same fever detect ec2, it works here as well
     }
 
     stages {

@@ -1,0 +1,16 @@
+[Unit]
+Description=Temperature Conversion Service
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+ExecStart=/usr/bin/java -jar /opt/services/temperature-conversion-service.jar
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=temperature-conversion-service
+
+[Install]
+WantedBy=multi-user.target
