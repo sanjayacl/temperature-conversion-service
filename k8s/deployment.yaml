@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperature-conversion-service
+  labels:
+    app: temperature-conversion-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: temperature-conversion-service
+  template:
+    metadata:
+      labels:
+        app: temperature-conversion-service
+    spec:
+      containers:
+        - name: temperature-conversion-service
+          # TODO: replace with your image registry/repo, e.g. ghcr.io/sanja/temperature-conversion-service:0.0.1
+          image: sanjayacl/temp-conversion:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          readinessProbe:
+            httpGet:
+              path: /api/temperature/convert?celsius=0
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/temperature/convert?celsius=0
+              port: 8081
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
