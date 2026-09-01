@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: temperature-conversion-service
+  labels:
+    app: temperature-conversion-service
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: temperature-conversion.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: temperature-conversion-service
+                port:
+                  number: 8081
