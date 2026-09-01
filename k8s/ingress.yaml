@@ -7,8 +7,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: temperature-conversion.local
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
