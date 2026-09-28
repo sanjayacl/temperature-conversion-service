@@ -9,7 +9,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /api/temperature
             pathType: Prefix
             backend:
               service:

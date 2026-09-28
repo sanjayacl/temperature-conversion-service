@@ -16,9 +16,8 @@ spec:
     spec:
       containers:
         - name: temperature-conversion-service
-          # TODO: replace with your image registry/repo, e.g. ghcr.io/sanja/temperature-conversion-service:0.0.1
           image: sanjayacl/temp-conversion:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
           readinessProbe:

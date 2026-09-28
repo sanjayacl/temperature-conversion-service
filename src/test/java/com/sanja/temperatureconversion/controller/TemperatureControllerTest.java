@@ -1,10 +1,15 @@
 package com.sanja.temperatureconversion.controller;
 
+import com.sanja.temperatureconversion.service.TemperatureService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -14,6 +19,17 @@ class TemperatureControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private TemperatureService temperatureService;
+
+    @BeforeEach
+    void stubConversion() {
+        when(temperatureService.celsiusToFahrenheit(anyDouble())).thenAnswer(invocation -> {
+            double input = invocation.getArgument(0);
+            return (input * 9.0 / 5.0) + 32.0;
+        });
+    }
 
     @Test
     void convertFreezingPoint() throws Exception {
