@@ -16,3 +16,10 @@ spec:
                 name: temperature-conversion-service
                 port:
                   number: 8081
+          - path: /actuator/prometheus
+            pathType: Exact
+            backend:
+              service:
+                name: temperature-conversion-service
+                port:
+                  number: 8081
