@@ -18,6 +18,21 @@ spec:
         - name: temperature-conversion-service
           image: sanjayacl/temp-conversion:latest
           imagePullPolicy: Always
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: temperature-conversion-service
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://otel-collector.monitoring.svc.cluster.local:4318
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: http/protobuf
+            - name: OTEL_TRACES_EXPORTER
+              value: otlp
+            - name: OTEL_METRICS_EXPORTER
+              value: none
+            - name: OTEL_LOGS_EXPORTER
+              value: none
+            - name: JAVA_TOOL_OPTIONS
+              value: "-javaagent:/opt/otel/opentelemetry-javaagent.jar"
           ports:
             - containerPort: 8081
           readinessProbe:
